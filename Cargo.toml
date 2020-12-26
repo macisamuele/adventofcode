@@ -1,0 +1,31 @@
+[workspace]
+
+members = [
+    "helpers",
+    "2020/01_report-repair",
+    "2020/02_password-philosophy",
+    "2020/03_toboggan-trajectory",
+    "2020/04_passport-processing",
+    "2020/05_binary-boarding",
+    "2020/06_custom-customs",
+    "2020/07_handy-haversacks",
+    "2020/08_handheld-halting",
+    "2020/09_encoding-error",
+    "2020/10_adapter-array",
+    "2020/11_seating-system",
+    "2020/12_rain-risk",
+    "2020/13_shuttle-search",
+    "2020/14_docking-data",
+    "2020/15_rambunctious-recitation",
+    "2020/16_ticket-translation",
+    "2020/17_conway-cubes",
+    "2020/18_operation-order",
+    "2020/19_monster-messages",
+    "2020/20_jurassic-jigsaw",
+    "2020/21_allergen-assessment",
+    "2020/22_crab-combat",
+    "2020/23_crab-cups",
+    "2020/24_lobby-layout",
+    "2020/25_combo-breaker",
+    # ADD HERE THE NEW DAY
+]

@@ -1,0 +1,76 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+
+        rust_version: [stable]
+
+    env:
+      OS: ${{ matrix.os }}
+
+      RUST_VERSION: ${{ matrix.rust_version }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: ${{ matrix.rust_version }}
+        override: true
+        components: rustfmt
+    - uses: actions-rs/cargo@v1
+      with:
+        command: build
+
+  clippy:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+
+        rust_version: [stable]
+
+    env:
+      OS: ${{ matrix.os }}
+
+      RUST_VERSION: ${{ matrix.rust_version }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: ${{ matrix.rust_version }}
+        override: true
+        components: clippy
+    - uses: actions-rs/clippy-check@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+  precommit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: pip install pre-commit
+    - name: Run Tox
+      run: pre-commit run --all-files

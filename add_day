@@ -1,0 +1,103 @@
+#!/bin/bash
+set -euo pipefail
+as_number() {  # $1=value
+    if ! (echo "$1" | grep --silent --extended-regexp  "^[0-9]+$"); then
+        echo "'$1' is expected to be a number and it is not" > /dev/stderr
+        exit 1
+    fi
+    echo "$1"
+}
+
+maybe_add_year() {
+    # Evaluated variables
+    if [ -d "${YEAR_DIRECTORY_ABSOLUTE}" ]; then
+        return
+    fi
+
+    # Create directory
+    mkdir --parent "${YEAR_DIRECTORY_ABSOLUTE}"
+
+    # Add README.md entry for the year
+
+
+    # Add a set of lines into the main README.md file as placeholder for the year assignments
+    readmeEntries=( \
+        "## [${YEAR}](https://adventofcode.com/${YEAR}/)" \
+        ""  \
+        "Hint: To add a new day run \`./add_day ${YEAR} <day_number> <title>\` from the repo root directory." \
+        "" \
+        "<!-- ADD NEW ${YEAR} DAY HERE -->" \
+        "" \
+    )
+
+    for readmeEntry in "${readmeEntries[@]}"; do
+        sed -ri "s~^(<!-- ADD NEW YEAR HERE -->)$~\1\n${readmeEntry}~" "${README_PATH}"
+    done
+
+    # Preparing the entries for a git commit
+    git add "${README_PATH}" "${YEAR_DIRECTORY_ABSOLUTE}"
+
+    echo "Templating for ${YEAR} is complete." > /dev/stderr
+}
+
+maybe_add_day() {
+    if [ -d "${DAY_DIRECTORY}" ]; then
+        echo "Directory for year ${YEAR}, day ${DAY_NUMBER} and title ${TITLE} already exists. Aborting" > /dev/stderr
+        exit 1
+    fi
+
+    # Create directory
+    mkdir --parent "${DAY_DIRECTORY}"
+
+    # Copy all the templated files
+    rsync --recursive "${REPO_ROOT}/.day_template/" "${DAY_DIRECTORY}/"
+
+    # Update all the varialbes into the copied files
+    for variableName in YEAR DAY_NUMBER TITLE KEBAB_CASE_TITLE; do
+        value=$(eval echo "\$${variableName}")
+
+        # Replace ${variableName} strings with the associated value
+        find "${DAY_DIRECTORY}" -type f -print0 | \
+            xargs --null --no-run-if-empty \
+                sed -ri "s/\\\$\{${variableName}\}/${value}/g"
+    done
+
+    # Add README.md entry for the (year, day) assignment
+    readmeEntry="* [Day ${DAY_NUMBER}](https://adventofcode.com/${YEAR}/day/${DAY_NUMBER}): [${TITLE}](${DAY_DIRECTORY}/)"
+    sed -ri "s~^(<!-- ADD NEW ${YEAR} DAY HERE -->)$~${readmeEntry}\n\1~" "${README_PATH}"
+
+    # Register the new (yeyar, day) assignment solution into the global workspace
+    cargoEntry="    \"${DAY_DIRECTORY}\","
+    sed -ri "s~^(    # ADD HERE THE NEW DAY)$~${cargoEntry}\n\1~" "${REPO_ROOT}/Cargo.toml"
+
+    # Preparing the entries for a git commit
+    git add "${DAY_DIRECTORY}" "${REPO_ROOT}/Cargo.toml" "${README_PATH}"
+
+    echo "Templating for ${YEAR}/12/${DAY_NUMBER} is complete. You can now start workng on ${DAY_DIRECTORY}" > /dev/stderr
+}
+
+if [ $# -ne 3 ]; then
+    echo "Usage: $0 <year> <day number> <title>" > /dev/stderr
+    exit 1
+fi
+
+if ! git diff-index --name-status --exit-code HEAD; then
+    echo "It appears that changes are present on the repository. Please commit all your changes before running this script" > /dev/stderr
+    exit 1
+fi
+
+# Constants
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+YEAR="$(as_number "$1")"
+DAY_NUMBER="$(as_number "$2")"
+TITLE="$3"
+
+# Evaluated variables
+KEBAB_CASE_TITLE="$(echo "${TITLE}" | sed -r 's/[^a-zA-Z0-9]/-/g; s/-+/-/g; s/^-//; s/-$//' | tr '[:upper:]' '[:lower:]')"
+YEAR_DIRECTORY="${YEAR}"
+YEAR_DIRECTORY_ABSOLUTE="${REPO_ROOT}/${YEAR}"
+DAY_DIRECTORY="${YEAR_DIRECTORY}/$(printf "%02d" "${DAY_NUMBER}")_${KEBAB_CASE_TITLE}"
+README_PATH="${REPO_ROOT}/README.md"
+
+maybe_add_year
+maybe_add_day
