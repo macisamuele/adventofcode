@@ -9,6 +9,13 @@ Not supposed to be perfect code ;)
 
 <!-- ADD NEW YEAR HERE -->
 
+## [2021](https://adventofcode.com/2021/)
+
+Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo root directory.
+
+* [Day 1](https://adventofcode.com/2021/day/0): [Sonar Sweep](2021/01_sonar-sweep/)
+<!-- ADD NEW 2021 DAY HERE -->
+
 ## [2020](https://adventofcode.com/2020/)
 
 Hint: To add a new day run `./add_day 2020 <day_number> <title>` from the repo root directory.

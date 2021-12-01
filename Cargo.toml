@@ -27,5 +27,6 @@ members = [
     "2020/23_crab-cups",
     "2020/24_lobby-layout",
     "2020/25_combo-breaker",
+    "2021/01_sonar-sweep",
     # ADD HERE THE NEW DAY
 ]
