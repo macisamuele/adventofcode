@@ -14,6 +14,7 @@ Not supposed to be perfect code ;)
 Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo root directory.
 
 * [Day 1](https://adventofcode.com/2021/day/0): [Sonar Sweep](2021/01_sonar-sweep/)
+* [Day 2](https://adventofcode.com/2021/day/2): [Dive!](2021/02_dive/)
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)
