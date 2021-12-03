@@ -29,5 +29,6 @@ members = [
     "2020/25_combo-breaker",
     "2021/01_sonar-sweep",
     "2021/02_dive",
+    "2021/03_binary-diagnostic",
     # ADD HERE THE NEW DAY
 ]
