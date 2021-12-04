@@ -30,5 +30,6 @@ members = [
     "2021/01_sonar-sweep",
     "2021/02_dive",
     "2021/03_binary-diagnostic",
+    "2021/04_giant-squid",
     # ADD HERE THE NEW DAY
 ]
