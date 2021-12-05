@@ -17,6 +17,7 @@ Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo r
 * [Day 2](https://adventofcode.com/2021/day/2): [Dive!](2021/02_dive/)
 * [Day 3](https://adventofcode.com/2021/day/3): [Binary Diagnostic](2021/03_binary-diagnostic/)
 * [Day 4](https://adventofcode.com/2021/day/4): [Giant Squid](2021/04_giant-squid/)
+* [Day 5](https://adventofcode.com/2021/day/5): [Hydrothermal Venture](2021/05_hydrothermal-venture/)
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)
