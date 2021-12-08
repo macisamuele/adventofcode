@@ -26,7 +26,7 @@ impl TryFrom<&[String]> for Grid {
                 .collect::<Result<_, _>>()?;
             anyhow::ensure!(parsed_values.len() == 5);
 
-            values[line_no][..5].clone_from_slice(&parsed_values[..5]);
+            values[line_no][..5].copy_from_slice(&parsed_values[..5]);
         }
 
         Ok(Self { values })

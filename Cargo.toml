@@ -34,5 +34,6 @@ members = [
     "2021/05_hydrothermal-venture",
     "2021/06_lanternfish",
     "2021/07_the-treachery-of-whales",
+    "2021/08_seven-segment-search",
     # ADD HERE THE NEW DAY
 ]
