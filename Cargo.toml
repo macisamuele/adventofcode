@@ -35,5 +35,6 @@ members = [
     "2021/06_lanternfish",
     "2021/07_the-treachery-of-whales",
     "2021/08_seven-segment-search",
+    "2021/09_smoke-basin",
     # ADD HERE THE NEW DAY
 ]
