@@ -37,5 +37,6 @@ members = [
     "2021/08_seven-segment-search",
     "2021/09_smoke-basin",
     "2021/10_syntax-scoring",
+    "2021/11_dumbo-octopus",
     # ADD HERE THE NEW DAY
 ]
