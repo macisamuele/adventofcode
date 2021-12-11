@@ -22,6 +22,7 @@ Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo r
 * [Day 7](https://adventofcode.com/2021/day/7): [The Treachery of Whales](2021/07_the-treachery-of-whales/)
 * [Day 8](https://adventofcode.com/2021/day/8): [Seven Segment Search](2021/08_seven-segment-search/)
 * [Day 9](https://adventofcode.com/2021/day/9): [Smoke Basin](2021/09_smoke-basin/)
+* [Day 10](https://adventofcode.com/2021/day/10): [Syntax Scoring](2021/10_syntax-scoring/)
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)
