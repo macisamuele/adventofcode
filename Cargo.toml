@@ -38,5 +38,6 @@ members = [
     "2021/09_smoke-basin",
     "2021/10_syntax-scoring",
     "2021/11_dumbo-octopus",
+    "2021/12_passage-pathing",
     # ADD HERE THE NEW DAY
 ]
