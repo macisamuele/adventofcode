@@ -39,5 +39,6 @@ members = [
     "2021/10_syntax-scoring",
     "2021/11_dumbo-octopus",
     "2021/12_passage-pathing",
+    "2021/13_transparent-origami",
     # ADD HERE THE NEW DAY
 ]
