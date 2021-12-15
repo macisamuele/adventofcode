@@ -26,6 +26,7 @@ Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo r
 * [Day 11](https://adventofcode.com/2021/day/11): [Dumbo Octopus](2021/11_dumbo-octopus/)
 * [Day 12](https://adventofcode.com/2021/day/12): [Passage Pathing](2021/12_passage-pathing/)
 * [Day 14](https://adventofcode.com/2021/day/14): [Extended Polymerization](2021/14_extended-polymerization/)
+* [Day 15](https://adventofcode.com/2021/day/15): [Chiton](2021/15_chiton/)
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)

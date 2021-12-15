@@ -41,5 +41,6 @@ members = [
     "2021/12_passage-pathing",
     "2021/13_transparent-origami",
     "2021/14_extended-polymerization",
+    "2021/15_chiton",
     # ADD HERE THE NEW DAY
 ]
