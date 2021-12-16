@@ -42,5 +42,6 @@ members = [
     "2021/13_transparent-origami",
     "2021/14_extended-polymerization",
     "2021/15_chiton",
+    "2021/16_packet-decoder",
     # ADD HERE THE NEW DAY
 ]
