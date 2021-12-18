@@ -44,5 +44,6 @@ members = [
     "2021/15_chiton",
     "2021/16_packet-decoder",
     "2021/17_trick-shot",
+    "2021/18_snailfish",
     # ADD HERE THE NEW DAY
 ]
