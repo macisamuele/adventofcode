@@ -32,6 +32,7 @@ Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo r
 * [Day 18](https://adventofcode.com/2021/day/18): [Snailfish](2021/18_snailfish/)
 * [Day 19](https://adventofcode.com/2021/day/19): [Beacon Scanner](2021/19_beacon-scanner/)
 * [Day 20](https://adventofcode.com/2021/day/20): [Trench Map](2021/20_trench-map/)
+* [Day 21](https://adventofcode.com/2021/day/21): [Dirac Dice](2021/21_dirac-dice/) :warning:
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)
@@ -62,7 +63,7 @@ Hint: To add a new day run `./add_day 2020 <day_number> <title>` from the repo r
 * [Day 22](https://adventofcode.com/2020/day/22): [Crab Combat](2020/22_crab-combat/)
 * [Day 23](https://adventofcode.com/2020/day/23): [Crab Cups](2020/23_crab-cups/)
 * [Day 24](https://adventofcode.com/2020/day/24): [Lobby Layout](2020/24_lobby-layout/)
-* [Day 25](https://adventofcode.com/2020/day/25): [Combo Breaker](2020/25_combo-breaker/) :warning:
+* [Day 25](https://adventofcode.com/2020/day/25): [Combo Breaker](2020/25_combo-breaker/)
 <!-- ADD NEW 2020 DAY HERE -->
 
 Legend:
