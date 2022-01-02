@@ -31,6 +31,7 @@ Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo r
 * [Day 17](https://adventofcode.com/2021/day/17): [Trick Shot](2021/17_trick-shot/)
 * [Day 18](https://adventofcode.com/2021/day/18): [Snailfish](2021/18_snailfish/)
 * [Day 19](https://adventofcode.com/2021/day/19): [Beacon Scanner](2021/19_beacon-scanner/)
+* [Day 20](https://adventofcode.com/2021/day/20): [Trench Map](2021/20_trench-map/)
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)

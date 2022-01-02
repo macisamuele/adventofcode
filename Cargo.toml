@@ -46,5 +46,6 @@ members = [
     "2021/17_trick-shot",
     "2021/18_snailfish",
     "2021/19_beacon-scanner",
+    "2021/20_trench-map",
     # ADD HERE THE NEW DAY
 ]
