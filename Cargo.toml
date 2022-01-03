@@ -48,5 +48,6 @@ members = [
     "2021/19_beacon-scanner",
     "2021/20_trench-map",
     "2021/21_dirac-dice",
+    "2021/22_reactor-reboot",
     # ADD HERE THE NEW DAY
 ]
