@@ -34,6 +34,7 @@ Hint: To add a new day run `./add_day 2021 <day_number> <title>` from the repo r
 * [Day 20](https://adventofcode.com/2021/day/20): [Trench Map](2021/20_trench-map/)
 * [Day 21](https://adventofcode.com/2021/day/21): [Dirac Dice](2021/21_dirac-dice/) :warning:
 * [Day 22](https://adventofcode.com/2021/day/22): [Reactor Reboot](2021/22_reactor-reboot/) :x:
+* [Day 23](https://adventofcode.com/2021/day/23): [Amphipod](2021/23_amphipod/) :x:
 <!-- ADD NEW 2021 DAY HERE -->
 
 ## [2020](https://adventofcode.com/2020/)
