@@ -1,5 +1,5 @@
-use enum_iterator::IntoEnumIterator;
 use std::collections::HashSet;
+use strum::{EnumIter, IntoEnumIterator};
 
 use std::str::FromStr;
 
@@ -42,11 +42,11 @@ impl std::ops::AddAssign for Point {
 
 impl Point {
     fn neighbours(&self) -> impl Iterator<Item = Point> + '_ {
-        Direction::into_enum_iter().map(move |direction| *self + direction.offset())
+        Direction::iter().map(move |direction| *self + direction.offset())
     }
 }
 
-#[derive(Debug, IntoEnumIterator)]
+#[derive(Debug, EnumIter)]
 enum Direction {
     E,
     NE,

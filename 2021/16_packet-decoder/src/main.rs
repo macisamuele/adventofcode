@@ -166,7 +166,7 @@ impl Packet {
         );
 
         let mut packets = vec![];
-        let mut peekable_iter = subpacket_bits.iter().by_val().peekable();
+        let mut peekable_iter = subpacket_bits.iter().by_vals().peekable();
         while peekable_iter.peek().is_some() {
             packets.push(Packet::read(&mut peekable_iter)?);
         }

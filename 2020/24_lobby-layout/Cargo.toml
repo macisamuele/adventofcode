@@ -8,5 +8,5 @@ edition = "2018"
 
 [dependencies]
 anyhow = "*"
-enum-iterator = "*"
+strum = {version = "*", features = ["derive"] }
 helpers = {path = "../../helpers"}
