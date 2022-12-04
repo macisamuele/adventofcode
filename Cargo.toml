@@ -52,5 +52,7 @@ members = [
     "2021/23_amphipod",
     "2021/24_arithmetic-logic-unit",
     "2021/25_sea-cucumber",
+    "2022/01_calorie-counting",
+    "2022/02_rock-paper-scissors",
     # ADD HERE THE NEW DAY
 ]
