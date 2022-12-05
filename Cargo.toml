@@ -54,5 +54,6 @@ members = [
     "2021/25_sea-cucumber",
     "2022/01_calorie-counting",
     "2022/02_rock-paper-scissors",
+    "2022/03_rucksack-reorganization",
     # ADD HERE THE NEW DAY
 ]
