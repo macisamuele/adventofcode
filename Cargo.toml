@@ -55,5 +55,6 @@ members = [
     "2022/01_calorie-counting",
     "2022/02_rock-paper-scissors",
     "2022/03_rucksack-reorganization",
+    "2022/04_camp-cleanup",
     # ADD HERE THE NEW DAY
 ]
