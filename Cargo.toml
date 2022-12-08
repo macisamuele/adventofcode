@@ -56,5 +56,6 @@ members = [
     "2022/02_rock-paper-scissors",
     "2022/03_rucksack-reorganization",
     "2022/04_camp-cleanup",
+    "2022/05_supply-stacks",
     # ADD HERE THE NEW DAY
 ]
