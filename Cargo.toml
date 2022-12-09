@@ -58,5 +58,6 @@ members = [
     "2022/04_camp-cleanup",
     "2022/05_supply-stacks",
     "2022/06_tuning-trouble",
+    "2022/07_no-space-left-on-device",
     # ADD HERE THE NEW DAY
 ]
