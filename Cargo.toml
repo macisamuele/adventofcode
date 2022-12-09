@@ -60,5 +60,6 @@ members = [
     "2022/06_tuning-trouble",
     "2022/07_no-space-left-on-device",
     "2022/08_treetop-tree-house",
+    "2022/09_rope-bridge",
     # ADD HERE THE NEW DAY
 ]
