@@ -62,5 +62,6 @@ members = [
     "2022/08_treetop-tree-house",
     "2022/09_rope-bridge",
     "2022/10_cathode-ray-tube",
+    "2022/11_monkey-in-the-middle",
     # ADD HERE THE NEW DAY
 ]
