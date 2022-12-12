@@ -21,7 +21,7 @@ impl<T: Eq> CircularBuffer<T> {
         if self.values.len() >= self.capacity {
             self.values.pop_front();
         }
-        self.values.push_back(value)
+        self.values.push_back(value);
     }
 
     fn last(&self) -> Option<&T> {
@@ -37,16 +37,16 @@ impl<T: Eq> CircularBuffer<T> {
     }
 }
 
-fn game(input: &[u64], turns: u64) -> u64 {
-    if turns < input.len() as u64 {
-        input[turns as usize]
+fn game(input: &[usize], turns: usize) -> usize {
+    if turns < input.len() {
+        input[turns]
     } else {
-        let mut values: Vec<u64> = vec![0; turns as usize];
-        let mut value_to_turns: HashMap<u64, CircularBuffer<u64>> = HashMap::new();
+        let mut values: Vec<usize> = vec![0; turns];
+        let mut value_to_turns: HashMap<usize, CircularBuffer<usize>> = HashMap::new();
 
         macro_rules! play {
             ($turn:expr, $value: expr) => {
-                values[$turn as usize] = $value;
+                values[$turn] = $value;
                 value_to_turns
                     .entry($value)
                     .or_insert_with(|| CircularBuffer::new(2))
@@ -55,10 +55,10 @@ fn game(input: &[u64], turns: u64) -> u64 {
         }
 
         for (turn, value) in input.iter().enumerate() {
-            play!(turn as u64, *value);
+            play!(turn, *value);
         }
 
-        for turn in (input.len() as u64)..turns {
+        for turn in input.len()..turns {
             let last = values[(turn - 1) as usize];
             match value_to_turns.get(&last) {
                 Some(turns) if turns.len() > 1 => {
@@ -75,20 +75,20 @@ fn game(input: &[u64], turns: u64) -> u64 {
     }
 }
 
-fn part01(input: &[u64]) -> u64 {
+fn part01(input: &[usize]) -> usize {
     game(input, 2_020)
 }
 
-fn part02(input: &[u64]) -> u64 {
+fn part02(input: &[usize]) -> usize {
     game(input, 30_000_000)
 }
 
 fn main() -> anyhow::Result<()> {
     let lines = input_lines(INPUT)?;
-    let input: Vec<_> = lines[0]
+    let input: Vec<usize> = lines[0]
         .split(',')
-        .filter_map(|part| part.parse::<u64>().ok())
-        .collect();
+        .map(str::parse)
+        .collect::<Result<_, _>>()?;
 
     println!("Part 1: {}", part01(&input));
     println!("Part 2: {}", part02(&input));

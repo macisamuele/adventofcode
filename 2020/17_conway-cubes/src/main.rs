@@ -149,7 +149,7 @@ impl World {
                         None
                     }
                 })
-            }))
+            }));
     }
 
     fn is_active(&self, point: &Point) -> bool {

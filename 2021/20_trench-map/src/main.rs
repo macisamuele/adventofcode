@@ -58,15 +58,15 @@ struct Square {
 
 impl From<[[bool; 3]; 3]> for Square {
     fn from(values: [[bool; 3]; 3]) -> Self {
-        let value = ((values[0][0] as u16) << 8)
-            | ((values[0][1] as u16) << 7)
-            | ((values[0][2] as u16) << 6)
-            | ((values[1][0] as u16) << 5)
-            | ((values[1][1] as u16) << 4)
-            | ((values[1][2] as u16) << 3)
-            | ((values[2][0] as u16) << 2)
-            | ((values[2][1] as u16) << 1)
-            | (values[2][2] as u16);
+        let value = (u16::from(values[0][0]) << 8)
+            | (u16::from(values[0][1]) << 7)
+            | (u16::from(values[0][2]) << 6)
+            | (u16::from(values[1][0]) << 5)
+            | (u16::from(values[1][1]) << 4)
+            | (u16::from(values[1][2]) << 3)
+            | (u16::from(values[2][0]) << 2)
+            | (u16::from(values[2][1]) << 1)
+            | u16::from(values[2][2]);
 
         Self {
             value: value as usize,

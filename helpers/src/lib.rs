@@ -26,7 +26,7 @@ pub fn input_lines(input: &str) -> anyhow::Result<Vec<String>> {
     let mut res: Vec<String> = match Opts::parse().input_filename.as_deref() {
         Some(path) => {
             eprintln!("Loading input from custom file: {}", &path);
-            read_lines(&path)?.collect()
+            read_lines(path)?.collect()
         }
         None => input.split('\n').map(ToString::to_string).collect(),
     };

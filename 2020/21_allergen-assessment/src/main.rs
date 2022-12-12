@@ -35,7 +35,7 @@ impl<'a> From<&Vec<&'a str>> for Input<'a> {
                     allergen_to_ingredients
                         .entry(allergen)
                         .and_modify(|ingredients: &mut HashSet<&'a str>| {
-                            ingredients.retain(|value| current_ingredients.contains(value))
+                            ingredients.retain(|value| current_ingredients.contains(value));
                         })
                         .or_insert_with(|| current_ingredients.clone());
                 });
@@ -85,7 +85,7 @@ fn part02(input: &Input) -> String {
 
     allergen_to_ingredient
         .values()
-        .cloned()
+        .copied()
         .collect::<Vec<_>>()
         .join(",")
 }

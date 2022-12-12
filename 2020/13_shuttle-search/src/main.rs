@@ -61,15 +61,7 @@ fn positive_module(mut a: i64, mut b: i64) -> i64 {
 
 fn module_inverse(a: i64, b: i64) -> i64 {
     // Evaluate a^(-1) ≡ 1 (mod b)
-    (1..=b)
-        .find_map(|value| {
-            if (value * a) % b == 1 {
-                Some(value)
-            } else {
-                None
-            }
-        })
-        .unwrap_or(1)
+    (1..=b).find(|value| (value * a) % b == 1).unwrap_or(1)
 }
 
 fn part02(line_numbers: &[Option<usize>]) -> i64 {

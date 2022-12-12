@@ -89,18 +89,13 @@ impl Iterator for PassportReader<'_> {
     fn next(&mut self) -> Option<Self::Item> {
         let mut passport_fields = HashMap::new();
         loop {
-            let next_line = self
-                .text_iter
-                .next()
-                .map(String::as_str)
-                .unwrap_or_else(|| "");
+            let next_line = self.text_iter.next().map_or_else(|| "", String::as_str);
             if next_line.is_empty() {
                 break;
-            } else {
-                for part in next_line.split(' ') {
-                    let (k, v) = scan_fmt!(part, "{}:{}", String, String).unwrap();
-                    passport_fields.insert(k, v);
-                }
+            }
+            for part in next_line.split(' ') {
+                let (k, v) = scan_fmt!(part, "{}:{}", String, String).unwrap();
+                passport_fields.insert(k, v);
             }
         }
 

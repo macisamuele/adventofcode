@@ -18,7 +18,7 @@ struct Graph<ID> {
 }
 
 impl<ID: Clone + Eq + std::hash::Hash> Graph<ID> {
-    fn add_edge(&mut self, src_node: ID, dst_node: ID, weight: usize) {
+    fn add_edge(&mut self, src_node: ID, dst_node: &ID, weight: usize) {
         if let Entry::Vacant(entry) = self.nodes.entry(src_node.clone()) {
             entry.insert(Vec::new());
         }
@@ -35,7 +35,7 @@ impl<ID: Clone + Eq + std::hash::Hash> Graph<ID> {
             weight,
             id: dst_node.clone(),
         });
-        self.reverse.get_mut(&dst_node).unwrap().push(Edge {
+        self.reverse.get_mut(dst_node).unwrap().push(Edge {
             weight,
             id: src_node,
         });
@@ -52,6 +52,7 @@ impl<ID: Clone + Eq + std::hash::Hash> Graph<ID> {
 
 type BagRules<'a> = Graph<&'a str>;
 
+#[allow(clippy::similar_names)]
 fn load_bag_rules(lines: &[String]) -> BagRules {
     let line_re: Regex = Regex::new(r"^(.*?) bags contain (.*)\.$").unwrap();
     let item_re: Regex = Regex::new("^(\\d+) (.*?) bags?$").unwrap();
@@ -68,7 +69,7 @@ fn load_bag_rules(lines: &[String]) -> BagRules {
                 let rule_captured = item_re.captures(rule).unwrap();
                 let contained_color = rule_captured.get(2).unwrap().as_str();
                 let count: usize = rule_captured.get(1).unwrap().as_str().parse().unwrap();
-                graph.add_edge(contained_color, container_color, count);
+                graph.add_edge(contained_color, &container_color, count);
             }
         }
     }

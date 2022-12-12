@@ -141,7 +141,7 @@ impl Packet {
 
             value = bits[1..]
                 .iter()
-                .fold(value, |res, bit| (res << 1) + *bit as usize);
+                .fold(value, |res, bit| (res << 1) + usize::from(*bit));
             if !bits[0] {
                 return Ok(Packet::Literal { version, value });
             }
@@ -155,7 +155,7 @@ impl Packet {
     ) -> Result<Packet, anyhow::Error> {
         let bits_count = bits_message_iter
             .take(15)
-            .fold(0, |res, bit| (res << 1) + bit as u16);
+            .fold(0, |res, bit| (res << 1) + u16::from(bit));
 
         let subpacket_bits: BitVec = bits_message_iter.take(bits_count as usize).collect();
         anyhow::ensure!(
@@ -186,7 +186,7 @@ impl Packet {
     ) -> Result<Packet, anyhow::Error> {
         let packets_count = bits_message_iter
             .take(11)
-            .fold(0, |res, bit| (res << 1) + bit as u16);
+            .fold(0, |res, bit| (res << 1) + u16::from(bit));
 
         let packets: Vec<_> = (0..packets_count)
             .map(|_| Packet::read(bits_message_iter))
@@ -203,15 +203,15 @@ impl Packet {
     fn read<I: Iterator<Item = bool>>(bits_message_iter: &mut I) -> Result<Self, anyhow::Error> {
         let version = bits_message_iter
             .take(3)
-            .fold(0, |res, bit| (res << 1) + bit as u8);
+            .fold(0, |res, bit| (res << 1) + u8::from(bit));
         let packet_id = bits_message_iter
             .take(3)
-            .fold(0, |res, bit| (res << 1) + bit as u8);
+            .fold(0, |res, bit| (res << 1) + u8::from(bit));
 
         if packet_id == 4 {
             Packet::read_literal(bits_message_iter, version)
         } else {
-            let length_type_id = bits_message_iter.next().map_or(0, |bit| bit as u8);
+            let length_type_id = bits_message_iter.next().map_or(0, u8::from);
             match length_type_id {
                 0 => Packet::read_subpacket_length(
                     bits_message_iter,
@@ -223,12 +223,10 @@ impl Packet {
                     version,
                     Operation::try_from(packet_id)?,
                 ),
-                _ => {
-                    return Err(anyhow::anyhow!(
-                        "length type ID is expected to be 0 or 1, received: {length_type_id}",
-                        length_type_id = length_type_id
-                    ));
-                }
+                _ => Err(anyhow::anyhow!(
+                    "length type ID is expected to be 0 or 1, received: {length_type_id}",
+                    length_type_id = length_type_id
+                )),
             }
         }
     }
@@ -264,29 +262,17 @@ impl Packet {
                     Operation::GreaterThan => {
                         let values: Vec<_> = packets_values.take(2).collect();
                         assert_eq!(values.len(), 2);
-                        if values[0] > values[1] {
-                            1
-                        } else {
-                            0
-                        }
+                        usize::from(values[0] > values[1])
                     }
                     Operation::LessThan => {
                         let values: Vec<_> = packets_values.take(2).collect();
                         assert_eq!(values.len(), 2);
-                        if values[0] < values[1] {
-                            1
-                        } else {
-                            0
-                        }
+                        usize::from(values[0] < values[1])
                     }
                     Operation::EqualTo => {
                         let values: Vec<_> = packets_values.take(2).collect();
                         assert_eq!(values.len(), 2);
-                        if values[0] == values[1] {
-                            1
-                        } else {
-                            0
-                        }
+                        usize::from(values[0] == values[1])
                     }
                 }
             }

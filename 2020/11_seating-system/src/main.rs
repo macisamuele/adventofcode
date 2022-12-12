@@ -25,11 +25,11 @@ enum Direction {
     SE,
 }
 
-fn usize_add_isize(value: usize, to_add: &isize) -> Option<usize> {
-    if to_add >= &0 {
-        Some(value + (*to_add as usize))
+fn usize_add_isize(value: usize, to_add: isize) -> Option<usize> {
+    if to_add >= 0 {
+        Some(value + usize::try_from(to_add).expect("Expected to be positive"))
     } else {
-        let to_add_abs = (-(*to_add)) as usize;
+        let to_add_abs = usize::try_from(-(to_add)).expect("Expected to be positive");
         value.checked_sub(to_add_abs)
     }
 }
@@ -52,8 +52,8 @@ impl Direction {
 
     fn move_(&self, (row, column): (usize, usize)) -> Option<(usize, usize)> {
         match (
-            usize_add_isize(row, &self.delta_row()),
-            usize_add_isize(column, &self.delta_column()),
+            usize_add_isize(row, self.delta_row()),
+            usize_add_isize(column, self.delta_column()),
         ) {
             (Some(r), Some(c)) => Some((r, c)),
             _ => None,
@@ -148,11 +148,11 @@ impl Map {
         direction: &Direction,
     ) -> Option<(usize, usize)> {
         while let Some((r, c)) = self.move_toward((row, column), direction) {
-            match self.grid[r][c] {
-                Place::Occupied | Place::Empty => {
+            match self.grid[r].get(c) {
+                Some(Place::Occupied | Place::Empty) => {
                     return Some((r, c));
                 }
-                _ => {}
+                Some(Place::Floor) | None => {}
             }
             row = r;
             column = c;

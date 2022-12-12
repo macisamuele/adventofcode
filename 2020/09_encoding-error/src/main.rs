@@ -22,7 +22,7 @@ impl<T> CircularBuffer<T> {
         if self.values.len() >= self.capacity {
             self.values.pop_front();
         }
-        self.values.push_back(value)
+        self.values.push_back(value);
     }
 
     fn iter(&self) -> impl Iterator<Item = &T> {
@@ -30,7 +30,7 @@ impl<T> CircularBuffer<T> {
     }
 }
 
-fn two_sum<'a, I: Iterator<Item = &'a i64>>(values_iter: I, target: &i64) -> bool {
+fn two_sum<'a, I: Iterator<Item = &'a i64>>(values_iter: I, target: i64) -> bool {
     let mut values: Vec<_> = values_iter.collect();
     values.sort();
 
@@ -40,7 +40,7 @@ fn two_sum<'a, I: Iterator<Item = &'a i64>>(values_iter: I, target: &i64) -> boo
     while left_index != right_index {
         let left = values[left_index];
         let right = values[right_index];
-        match (left + right).cmp(target) {
+        match (left + right).cmp(&target) {
             Ordering::Equal => {
                 return true;
             }
@@ -83,7 +83,7 @@ fn part01(values: &[i64]) -> i64 {
     });
 
     for value in values.iter().skip(COUNT) {
-        if !two_sum(buffer.iter(), value) {
+        if !two_sum(buffer.iter(), *value) {
             return *value;
         }
         buffer.add(*value);
@@ -100,7 +100,7 @@ fn part02(values: &[i64]) -> i64 {
     });
 
     for (idx, value) in values.iter().skip(COUNT).enumerate() {
-        if !two_sum(buffer.iter(), value) {
+        if !two_sum(buffer.iter(), *value) {
             let contigous_numbers = contigous_numbers_with_sum(
                 values
                     .iter()

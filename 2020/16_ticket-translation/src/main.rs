@@ -183,7 +183,7 @@ fn part02(input: &Input) -> usize {
     }
 
     let mut possible_fields_per_column = (0..input.ticket.field_values.len())
-        .map(|index| (index, input.field_to_ranges.keys().cloned().collect()))
+        .map(|index| (index, input.field_to_ranges.keys().copied().collect()))
         .collect::<BTreeMap<_, HashSet<_>>>();
 
     let mut certanly_allocated_field_names = HashSet::new();

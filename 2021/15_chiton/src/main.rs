@@ -51,6 +51,7 @@ impl Grid {
         .collect()
     }
 
+    #[allow(clippy::unused_self)]
     fn top_left(&self) -> Point {
         (0, 0)
     }
@@ -118,7 +119,8 @@ impl Grid {
                     (0..columns)
                         .map(|column| {
                             let reference = self.inner[row % self.rows][column % self.columns];
-                            let add = (row / self.rows + column / self.columns) as u8;
+                            let add = u8::try_from(row / self.rows + column / self.columns)
+                                .expect("Expected number in 0-255");
                             (reference + add - 1) % 9 + 1
                         })
                         .collect()

@@ -11,9 +11,9 @@ struct Rate {
 
 impl Rate {
     fn add_value(&mut self, value: usize) {
-        for bit_power in 0..=(NUMBER_OF_BITS - 1) {
+        for bit_power in 0..NUMBER_OF_BITS {
             if value & 1 << bit_power != 0 {
-                self.bit_sum[bit_power] += 1
+                self.bit_sum[bit_power] += 1;
             }
         }
         self.number_of_elements += 1;
@@ -23,7 +23,7 @@ impl Rate {
         let mut result = 0;
         let min_elements_to_be_one = self.number_of_elements >> 1;
 
-        for bit_power in 0..=(NUMBER_OF_BITS - 1) {
+        for bit_power in 0..NUMBER_OF_BITS {
             if self.bit_sum[bit_power] >= min_elements_to_be_one {
                 result |= 1 << bit_power;
             }

@@ -18,7 +18,7 @@ impl IndividualAnswersGroup {
         self.individual_answers.iter().for_each(|answers| {
             answers.positive.chars().for_each(|positive_answer| {
                 positively_answered[(positive_answer as usize) - ('a' as usize)] += 1;
-            })
+            });
         });
         positively_answered
     }
@@ -48,18 +48,13 @@ impl Iterator for IndividualAnswersGroupReader<'_> {
     fn next(&mut self) -> Option<Self::Item> {
         let mut individual_answers = Vec::new();
         loop {
-            let next_line = self
-                .text_iter
-                .next()
-                .map(String::as_str)
-                .unwrap_or_else(|| "");
+            let next_line = self.text_iter.next().map_or_else(|| "", String::as_str);
             if next_line.is_empty() {
                 break;
-            } else {
-                individual_answers.push(IndividualAnswers {
-                    positive: next_line.to_string(),
-                });
             }
+            individual_answers.push(IndividualAnswers {
+                positive: next_line.to_string(),
+            });
         }
 
         if individual_answers.is_empty() {
@@ -73,14 +68,14 @@ impl Iterator for IndividualAnswersGroupReader<'_> {
 fn part01(individual_answers_groups: &[IndividualAnswersGroup]) -> usize {
     individual_answers_groups
         .iter()
-        .map(|group_answers| group_answers.positively_answered_by_any_count())
+        .map(IndividualAnswersGroup::positively_answered_by_any_count)
         .sum()
 }
 
 fn part02(individual_answers_groups: &[IndividualAnswersGroup]) -> usize {
     individual_answers_groups
         .iter()
-        .map(|group_answers| group_answers.positively_answered_by_all_count())
+        .map(IndividualAnswersGroup::positively_answered_by_all_count)
         .sum()
 }
 

@@ -240,10 +240,9 @@ impl From<&Vec<String>> for Input {
                 .collect();
             if rules_to_update.is_empty() {
                 break;
-            } else {
-                for (index, simplified_rule) in rules_to_update {
-                    rule_id_to_rule.insert(index, simplified_rule);
-                }
+            }
+            for (index, simplified_rule) in rules_to_update {
+                rule_id_to_rule.insert(index, simplified_rule);
             }
         }
 

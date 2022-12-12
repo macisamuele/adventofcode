@@ -161,7 +161,9 @@ impl Point3D {
 
     fn manhattan_distance(&self, other: &Self) -> usize {
         let diff = self - other;
-        diff.x.abs() as usize + diff.y.abs() as usize + diff.z.abs() as usize
+        diff.x.unsigned_abs() as usize
+            + diff.y.unsigned_abs() as usize
+            + diff.z.unsigned_abs() as usize
     }
 }
 

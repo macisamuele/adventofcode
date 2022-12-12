@@ -42,16 +42,13 @@ impl BoardingPass {
 fn part01(boarding_passes: &[BoardingPass]) -> usize {
     boarding_passes
         .iter()
-        .map(|bp| bp.seat_id())
+        .map(BoardingPass::seat_id)
         .max()
         .unwrap_or(0)
 }
 
 fn part02(boarding_passes: &[BoardingPass]) -> usize {
-    let mut sorted_sids: Vec<_> = boarding_passes
-        .iter()
-        .map(|boarding_pass| boarding_pass.seat_id())
-        .collect();
+    let mut sorted_sids: Vec<_> = boarding_passes.iter().map(BoardingPass::seat_id).collect();
     sorted_sids.sort_unstable();
 
     for (index, seat_id) in sorted_sids.iter().enumerate() {

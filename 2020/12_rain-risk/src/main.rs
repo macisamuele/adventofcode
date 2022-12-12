@@ -44,19 +44,19 @@ enum ShipDirection {
     West,
 }
 
-fn degree_to_quarters(degrees: i128) -> usize {
+fn degree_to_quarters(degrees: i64) -> i64 {
     // degrees > 0 => degrees counter-clockwise rotation
     // degrees < 0 => -degrees counter-clockwise rotation
     let mut quarters = -degrees / 90;
     while quarters < 0 {
         quarters += 4;
     }
-    quarters as usize
+    quarters
 }
 
 impl ShipDirection {
-    fn rotate(&mut self, degrees: i128) {
-        fn quarter(value: &ShipDirection) -> usize {
+    fn rotate(&mut self, degrees: i64) {
+        fn quarter(value: ShipDirection) -> i64 {
             match value {
                 ShipDirection::East => 0,
                 ShipDirection::South => 1,
@@ -65,7 +65,7 @@ impl ShipDirection {
             }
         }
 
-        *self = match (quarter(self) + degree_to_quarters(degrees)).checked_rem(4) {
+        *self = match (quarter(*self) + degree_to_quarters(degrees)).checked_rem(4) {
             Some(0) => Self::East,
             Some(1) => Self::South,
             Some(2) => Self::West,
@@ -77,12 +77,12 @@ impl ShipDirection {
 
 #[derive(Debug)]
 struct Point {
-    east: i128,
-    north: i128,
+    east: i64,
+    north: i64,
 }
 
 impl Point {
-    fn rotate(&mut self, degrees: i128) {
+    fn rotate(&mut self, degrees: i64) {
         let rotation_in_quarters = degree_to_quarters(degrees);
         match rotation_in_quarters {
             0 => {
@@ -107,8 +107,8 @@ impl Point {
         }
     }
 
-    fn manhattan_distance(&self) -> usize {
-        (self.north.abs() + self.east.abs()) as usize
+    fn manhattan_distance(&self) -> u64 {
+        self.north.unsigned_abs() + self.east.unsigned_abs()
     }
 }
 
@@ -140,7 +140,7 @@ impl Ship {
     fn perform_move_without_waypoint(&mut self, move_: &Move) {
         match move_ {
             Move::East(value) => {
-                self.position.east += *value as i128;
+                self.position.east += *value as i64;
             }
             Move::Forward(value) => self.perform_move(&match self.direction {
                 ShipDirection::South => Move::South(*value),
@@ -149,19 +149,19 @@ impl Ship {
                 ShipDirection::East => Move::East(*value),
             }),
             Move::North(value) => {
-                self.position.north += *value as i128;
+                self.position.north += *value as i64;
             }
             Move::RotateLeft(value) => {
-                self.direction.rotate(*value as i128);
+                self.direction.rotate(*value as i64);
             }
             Move::RotateRight(value) => {
-                self.direction.rotate(-(*value as i128));
+                self.direction.rotate(-(*value as i64));
             }
             Move::South(value) => {
-                self.position.north -= *value as i128;
+                self.position.north -= *value as i64;
             }
             Move::West(value) => {
-                self.position.east -= *value as i128;
+                self.position.east -= *value as i64;
             }
         }
     }
@@ -170,44 +170,44 @@ impl Ship {
         let waypoint_position: &mut Point = self.waypoint_position.as_mut().unwrap();
         match move_ {
             Move::East(value) => {
-                waypoint_position.east += *value as i128;
+                waypoint_position.east += *value as i64;
             }
             Move::Forward(value) => {
-                self.position.east += (*value as i128) * waypoint_position.east;
-                self.position.north += (*value as i128) * waypoint_position.north;
+                self.position.east += (*value as i64) * waypoint_position.east;
+                self.position.north += (*value as i64) * waypoint_position.north;
             }
             Move::North(value) => {
-                waypoint_position.north += *value as i128;
+                waypoint_position.north += *value as i64;
             }
             Move::RotateLeft(value) => {
-                waypoint_position.rotate(-(*value as i128));
+                waypoint_position.rotate(-(*value as i64));
             }
             Move::RotateRight(value) => {
-                waypoint_position.rotate(*value as i128);
+                waypoint_position.rotate(*value as i64);
             }
             Move::South(value) => {
-                waypoint_position.north -= *value as i128;
+                waypoint_position.north -= *value as i64;
             }
             Move::West(value) => {
-                waypoint_position.east -= *value as i128;
+                waypoint_position.east -= *value as i64;
             }
         }
     }
 
     fn perform_move(&mut self, move_: &Move) {
         if self.waypoint_position.is_none() {
-            self.perform_move_without_waypoint(move_)
+            self.perform_move_without_waypoint(move_);
         } else {
-            self.perform_move_with_waypoint(move_)
+            self.perform_move_with_waypoint(move_);
         }
     }
 
-    fn manhattan_distance(&self) -> usize {
+    fn manhattan_distance(&self) -> u64 {
         self.position.manhattan_distance()
     }
 }
 
-fn part01(moves: &[Move]) -> usize {
+fn part01(moves: &[Move]) -> u64 {
     let mut ship = Ship::new();
     for move_ in moves {
         ship.perform_move(move_);
@@ -215,7 +215,7 @@ fn part01(moves: &[Move]) -> usize {
     ship.manhattan_distance()
 }
 
-fn part02(moves: &[Move]) -> usize {
+fn part02(moves: &[Move]) -> u64 {
     let mut ship = Ship::new_with_waypoint(Point { east: 10, north: 1 });
     for move_ in moves {
         ship.perform_move(move_);

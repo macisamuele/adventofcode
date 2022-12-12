@@ -5,26 +5,14 @@ const INPUT: &str = include_str!("../input.txt");
 fn part01(input: &[usize]) -> usize {
     input
         .windows(2)
-        .map(|elements| {
-            if elements.last().unwrap() > elements.first().unwrap() {
-                1
-            } else {
-                0
-            }
-        })
+        .map(|elements| usize::from(elements.last().unwrap() > elements.first().unwrap()))
         .sum()
 }
 
 fn part02(input: &[usize]) -> usize {
     input
         .windows(4)
-        .map(|elements| {
-            if elements.last().unwrap() > elements.first().unwrap() {
-                1
-            } else {
-                0
-            }
-        })
+        .map(|elements| usize::from(elements.last().unwrap() > elements.first().unwrap()))
         .sum()
 }
 

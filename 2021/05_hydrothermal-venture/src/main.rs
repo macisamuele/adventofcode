@@ -60,6 +60,7 @@ impl Line {
         (min_y..max_y).map(move |y| Point { x, y })
     }
 
+    #[allow(clippy::similar_names)]
     fn to_diagonal_points(&self) -> impl Iterator<Item = Point> {
         let (min_x, max_x): (usize, usize) = if self.point1.x < self.point2.x {
             (self.point1.x, self.point2.x + 1)

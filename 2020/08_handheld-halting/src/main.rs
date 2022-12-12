@@ -37,9 +37,9 @@ impl MachineState<'_> {
             }
             Rule::Jmp(value) => {
                 if value > 0 {
-                    self.index += value as usize;
+                    self.index += usize::try_from(value).expect("Positive value");
                 } else {
-                    self.index -= -value as usize;
+                    self.index -= usize::try_from(-value).expect("Positive value");
                 }
             }
             Rule::NoOp(_) => {

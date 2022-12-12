@@ -92,7 +92,7 @@ fn part01(instructions: &[Instruction]) -> u64 {
             }
         };
     }
-    memory_slots.values().cloned().sum()
+    memory_slots.values().copied().sum()
 }
 
 fn part02(instructions: &[Instruction]) -> u64 {
@@ -112,7 +112,7 @@ fn part02(instructions: &[Instruction]) -> u64 {
             }
         };
     }
-    memory_slots.values().cloned().sum()
+    memory_slots.values().copied().sum()
 }
 
 fn main() -> anyhow::Result<()> {
