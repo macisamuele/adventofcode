@@ -64,5 +64,6 @@ members = [
     "2022/10_cathode-ray-tube",
     "2022/11_monkey-in-the-middle",
     "2022/12_hill-climbing-algorithm",
+    "2022/13_distress-signal",
     # ADD HERE THE NEW DAY
 ]
